@@ -1,6 +1,7 @@
 import app from './app';
 import db from './models';
 import dotenv from 'dotenv';
+const port=9000;
 
 dotenv.config();
 
@@ -9,8 +10,8 @@ dotenv.config();
     try {
         await db.sequelize.authenticate();
 
-        app.listen(3002,()=>{
-            console.log('Server running ');
+        app.listen(port,()=>{
+            console.log('Server running '+port);
         })
        
     } catch (error) {

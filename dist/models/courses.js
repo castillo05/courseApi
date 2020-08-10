@@ -8,10 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     name: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    age: DataTypes.INTEGER,
-    email: DataTypes.STRING,
-    id_course: DataTypes.INTEGER
+    schedule: DataTypes.STRING,
+    dateStart: DataTypes.STRING,
+    dateEnd: DataTypes.STRING,
+    numberStudents: DataTypes.INTEGER
   }, {});
   return courses;
 };

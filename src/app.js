@@ -1,9 +1,11 @@
 import express from 'express';
+import rutas from './routes';
 
 const app=express();
 
 app.use(express.urlencoded({extended:true}));
-app.use(express.json);
+app.use(express.json());
+
 
 //configurar cabeceras http
 app.use((req,res,next)=>{
@@ -14,8 +16,8 @@ app.use((req,res,next)=>{
 	next();
 });
 
-app.use('/api',(req,res)=>{
-    res.json({message:'Welcome to Api'});
+app.get('/api',(req,res)=>{
+    res.status(200).send({message:'Welcome to Api'});
 });
 
 
