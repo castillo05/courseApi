@@ -7,4 +7,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const app = (0, _express.default)();
 app.use(require('./students'));
 app.use(require('./courses'));
+app.use(require('./course_student'));
 module.exports = app;

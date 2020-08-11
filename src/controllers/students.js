@@ -66,7 +66,15 @@ const getstudent= async(req, res)=>{
     try {
         const id=req.params.id;
 
-        const student= await db.students.findByPk(id);
+        const student= await db.students.findByPk(id,{
+            include:[
+                {   
+                    model:db.courses,
+                    as:'courses'
+                }
+                
+            ]
+        });
 
         if(student){
             res.status(200).send({student:student});

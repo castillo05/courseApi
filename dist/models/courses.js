@@ -13,5 +13,14 @@ module.exports = (sequelize, DataTypes) => {
     dateEnd: DataTypes.STRING,
     numbersStudents: DataTypes.INTEGER
   }, {});
+
+  courses.associate = function (models) {
+    //Asociaciones
+    courses.belongsToMany(models.students, {
+      through: 'course_students',
+      foreignKey: 'id_course'
+    });
+  };
+
   return courses;
 };

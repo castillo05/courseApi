@@ -11,5 +11,12 @@ module.exports=(sequelize, DataTypes)=>{
 
     });
 
+    courses.associate=function (models) {
+        //Asociaciones
+        
+        courses.belongsToMany(models.students, { through: 'course_students',foreignKey:'id_course' });
+       
+    }
+
     return courses;
 }

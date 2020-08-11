@@ -13,5 +13,14 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING
   }, {});
+
+  students.associate = function (models) {
+    //Asociaciones
+    students.belongsToMany(models.courses, {
+      through: 'course_students',
+      foreignKey: 'id_student'
+    });
+  };
+
   return students;
 };
