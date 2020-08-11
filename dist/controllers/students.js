@@ -6,7 +6,7 @@ var _bcrypt = _interopRequireDefault(require("bcrypt"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const createStudents = async () => {
+const createStudents = async (req, res) => {
   const {
     name,
     lastName,
@@ -16,7 +16,7 @@ const createStudents = async () => {
     id_course
   } = req.body;
 
-  _models.default.findAll({
+  _models.default.students.findAll({
     where: {
       email: email
     }

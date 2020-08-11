@@ -1,11 +1,11 @@
 import db from '../models';
 import bcrypt from 'bcrypt';
 
-const createStudents= async()=>{
+const createStudents= async(req,res)=>{
 
     const {name,lastName,age,email,password,id_course}=req.body;
 
-    db.findAll({
+    db.students.findAll({
         where:{
             email:email
         }

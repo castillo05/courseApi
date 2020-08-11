@@ -3,7 +3,7 @@ import {createStudents} from '../controllers/students';
 
 const api=express.Router();
 
-api.get('login',createStudents);
+api.post('/singup',createStudents);
 
 module.exports =api;
 

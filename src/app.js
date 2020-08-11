@@ -1,6 +1,5 @@
 import express from 'express';
-import rutas from './routes';
-
+import route from './routes/index'
 const app=express();
 
 app.use(express.urlencoded({extended:true}));
@@ -16,9 +15,12 @@ app.use((req,res,next)=>{
 	next();
 });
 
+
+
 app.get('/api',(req,res)=>{
     res.status(200).send({message:'Welcome to Api'});
 });
 
+app.use('/api',route);
 
 module.exports=app;

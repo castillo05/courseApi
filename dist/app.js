@@ -2,7 +2,7 @@
 
 var _express = _interopRequireDefault(require("express"));
 
-var _routes = _interopRequireDefault(require("./routes"));
+var _index = _interopRequireDefault(require("./routes/index"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,4 +24,5 @@ app.get('/api', (req, res) => {
     message: 'Welcome to Api'
   });
 });
+app.use('/api', _index.default);
 module.exports = app;
