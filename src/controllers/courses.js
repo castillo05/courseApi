@@ -2,14 +2,16 @@ import db from '../models';
 
 const createCourse= async(req, res)=>{
     try {
-        const {name,schedule,dateStart,dateEnd,numberStudents}= req.body;
+        const {name,schedule,dateStart,dateEnd}= req.body;
+
+        if(name==='' || schedule==='' || dateStart==='' || dateEnd==='') return res.status(200).send({message:'Complete todos los campos'})
 
         db.courses.create({
             name:name,
             schedule: schedule,
             dateStart: dateStart,
             dateEnd: dateEnd,
-            numberStudents: numberStudents
+            numberStudents: 0
         }).then(course => {
             res.status(200).send({course:course})
         }).catch(error => {
@@ -81,10 +83,25 @@ const updateCourse= async (req, res) => {
     }
 }
 
+const getCoursesCount= async (req, res) => {
+    try {
+        const getCourses= await db.courses.findAll({
+           limit:3,
+            order:[
+                ['numbersStudents','DESC']
+            ]
+        });
+
+        getCourses !== null ? res.status(200).send({courses:getCourses}) : res.status(200).send({message:'No hay cursos disponibles'})
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 module.exports ={ 
     createCourse,
     getCourse,
     getCourses,
-    updateCourse
+    updateCourse,
+    getCoursesCount
 }

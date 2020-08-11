@@ -10,16 +10,18 @@ const createCourse = async (req, res) => {
       name,
       schedule,
       dateStart,
-      dateEnd,
-      numberStudents
+      dateEnd
     } = req.body;
+    if (name === '' || schedule === '' || dateStart === '' || dateEnd === '') return res.status(200).send({
+      message: 'Complete todos los campos'
+    });
 
     _models.default.courses.create({
       name: name,
       schedule: schedule,
       dateStart: dateStart,
       dateEnd: dateEnd,
-      numberStudents: numberStudents
+      numberStudents: 0
     }).then(course => {
       res.status(200).send({
         course: course
@@ -103,9 +105,26 @@ const updateCourse = async (req, res) => {
   }
 };
 
+const getCoursesCount = async (req, res) => {
+  try {
+    const getCourses = await _models.default.courses.findAll({
+      limit: 3,
+      order: [['numbersStudents', 'DESC']]
+    });
+    getCourses !== null ? res.status(200).send({
+      courses: getCourses
+    }) : res.status(200).send({
+      message: 'No hay cursos disponibles'
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createCourse,
   getCourse,
   getCourses,
-  updateCourse
+  updateCourse,
+  getCoursesCount
 };

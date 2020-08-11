@@ -16,6 +16,9 @@ const createStudents = async (req, res) => {
     email,
     password
   } = req.body;
+  if (name === '' || lastName === '' || age === '' || email === '' || password === '') return res.status(200).send({
+    message: 'Complete todos los campos'
+  });
 
   _models.default.students.findAll({
     where: {
@@ -134,9 +137,45 @@ const getStudents = async (req, res) => {
   }
 };
 
+const updateStudent = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const {
+      name,
+      email,
+      lastName
+    } = req.body;
+    if (name === '' || lastName === '' || email === '') return res.status(200).send({
+      message: 'Favor escriba la información que desea actualizar'
+    });
+    const update = await _models.default.students.update({
+      name: name,
+      email: email,
+      lastName: lastName
+    }, {
+      where: {
+        id: id
+      }
+    });
+
+    if (update) {
+      res.status(200).send({
+        message: 'Actualizado con exito'
+      });
+    } else {
+      res.status(200).send({
+        message: 'Lo sentimos no se puede actualizar'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createStudents,
   login,
   getstudent,
-  getStudents
+  getStudents,
+  updateStudent
 };

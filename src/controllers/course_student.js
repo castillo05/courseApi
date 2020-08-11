@@ -5,6 +5,17 @@ const addCourseStudent= async(req, res)=>{
     try {
         const {id_student,id_course}= req.body;
 
+        const verifySuscription= await db.course_students.findAll({
+            where: {
+                id_course: id_course,
+                id_student: id_student
+            }
+        })
+
+        if(verifySuscription.length>=1){
+           return res.status(200).send({message:'Ya estas suscrito a este curso!'})
+        }
+
         const addCourse= await db.course_students.create({
             id_course:id_course,
             id_student: id_student
