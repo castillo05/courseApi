@@ -11,7 +11,17 @@ const addCourseStudent= async(req, res)=>{
         })
 
         if(addCourse){
-            res.status(200).send({suscription:addCourse})
+            const getCourse= await db.courses.findByPk(addCourse.id_course);
+            let numbersStudents=getCourse.numbersStudents;
+            let sumCourse=numbersStudents+1;
+            const update= await db.courses.update({numbersStudents:sumCourse},{
+                where:{
+                    id:id_course
+                }
+            });
+
+            update ? res.status(200).send({message:'Suscrito con exito'}) : res.status(200).send({message:'Error'});
+            // res.status(200).send({suscription:addCourse})
         }else{
 
         }
