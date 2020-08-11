@@ -1,5 +1,6 @@
 import db from '../models';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const createStudents= async(req,res)=>{
 
@@ -51,7 +52,18 @@ const login= async (req, res) => {
             const pass= await bcrypt.compare(password,students.password)
 
             if(pass){
-                res.status(200).send({student: students});
+                let token=jwt.sign({
+                    user:{
+                        id:students.id,
+                        name:students.name,
+                        email:students.email
+                    }
+
+                },'jcdeveloper',{expiresIn:60*60});
+                req.body.gethash ?
+                res.status(200).send({token:token})
+                :
+                res.status(200).send({student: students})
             }else{
                 res.status(200).send({message:'Contraseña Incorrecta'});
             }

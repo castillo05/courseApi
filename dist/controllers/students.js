@@ -4,6 +4,8 @@ var _models = _interopRequireDefault(require("../models"));
 
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 
+var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const createStudents = async (req, res) => {
@@ -69,7 +71,19 @@ const login = async (req, res) => {
       const pass = await _bcrypt.default.compare(password, students.password);
 
       if (pass) {
-        res.status(200).send({
+        let token = _jsonwebtoken.default.sign({
+          user: {
+            id: students.id,
+            name: students.name,
+            email: students.email
+          }
+        }, 'jcdeveloper', {
+          expiresIn: 60 * 60
+        });
+
+        req.body.gethash ? res.status(200).send({
+          token: token
+        }) : res.status(200).send({
           student: students
         });
       } else {
