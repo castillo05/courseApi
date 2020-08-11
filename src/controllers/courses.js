@@ -44,7 +44,47 @@ const getCourse= async (req, res) => {
 }
 
 
+const getCourses= async (req, res) => {
+    try {
+        const getCourses= await db.courses.findAll();
+
+        getCourses !== null ? res.status(200).send({courses:getCourses}) : res.status(200).send({message:'No hay cursos disponibles'})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateCourse= async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const {name,schedule,dateStart,dateEnd}= req.body;
+
+        const update= await db.courses.update({
+            name:name,
+            schedule: schedule,
+            dateStart: dateStart,
+            dateEnd: dateEnd
+        },{
+            where: {
+                id: id
+            }
+        })
+
+        if(update){
+            res.status(200).send({message:'Curso actualizado con exito'})
+        }else{
+            res.status(200).send({message:'Lo sentimos este curso no se puede actualizar'})
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 module.exports ={ 
     createCourse,
-    getCourse
+    getCourse,
+    getCourses,
+    updateCourse
 }
