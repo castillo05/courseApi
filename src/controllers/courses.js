@@ -20,7 +20,31 @@ const createCourse= async(req, res)=>{
     }
 }
 
+const getCourse= async (req, res) => {
+    try {
+        const id=req.params.id
+
+        const getCourse= await db.courses.findByPk(id,{
+            include:[
+                {
+                    model:db.students,
+                    as:'students'
+                }
+            ]
+        });
+
+        if(getCourse=== null){
+            res.status(200).send({message:'Curso no encontrado'})
+        }else{
+            res.status(200).send({course:getCourse});
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 module.exports ={ 
-    createCourse
+    createCourse,
+    getCourse
 }
