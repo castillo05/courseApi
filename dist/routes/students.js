@@ -9,4 +9,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const api = _express.default.Router();
 
 api.post('/singup', _students.createStudents);
+api.post('/login', _students.login);
+api.get('/student/:id', _students.getstudent);
 module.exports = api;
