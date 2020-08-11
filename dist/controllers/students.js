@@ -102,8 +102,22 @@ const getstudent = async (req, res) => {
   }
 };
 
+const getStudents = async (req, res) => {
+  try {
+    const students = await _models.default.students.findAll();
+    students ? res.status(200).send({
+      students: students
+    }) : res.status(200).send({
+      message: 'Ocurrio un error al listar los estudiantes'
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createStudents,
   login,
-  getstudent
+  getstudent,
+  getStudents
 };
