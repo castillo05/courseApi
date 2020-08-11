@@ -2,9 +2,11 @@
 
 var _express = _interopRequireDefault(require("express"));
 
+var _courses = require("../controllers/courses");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const app = (0, _express.default)();
-app.use(require('./students'));
-app.use(require('./courses'));
-module.exports = app;
+const api = _express.default.Router();
+
+api.post('/course', _courses.createCourse);
+module.exports = api;

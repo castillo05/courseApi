@@ -12,8 +12,7 @@ const createStudents = async (req, res) => {
     lastName,
     age,
     email,
-    password,
-    id_course
+    password
   } = req.body;
 
   _models.default.students.findAll({
@@ -34,8 +33,7 @@ const createStudents = async (req, res) => {
         lastName: lastName,
         age: age,
         email: email,
-        password: hash,
-        id_course: id_course
+        password: hash
       }).then(student => {
         res.status(200).send({
           student: student

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const createStudents= async(req,res)=>{
 
-    const {name,lastName,age,email,password,id_course}=req.body;
+    const {name,lastName,age,email,password}=req.body;
 
     db.students.findAll({
         where:{
@@ -20,8 +20,7 @@ const createStudents= async(req,res)=>{
                 lastName:lastName,
                 age:age,
                 email:email,
-                password:hash,
-                id_course:id_course
+                password:hash
             }).then(student=>{
                 res.status(200).send({student:student});
             }).catch(error=>{

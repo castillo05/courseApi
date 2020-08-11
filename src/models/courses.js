@@ -5,7 +5,7 @@ module.exports=(sequelize, DataTypes)=>{
         schedule:DataTypes.STRING,
         dateStart:DataTypes.STRING,
         dateEnd:DataTypes.STRING,
-        numberStudents:DataTypes.INTEGER
+        numbersStudents:DataTypes.INTEGER
     },
     {
 
