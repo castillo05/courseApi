@@ -1,9 +1,10 @@
 import app from './app';
 import db from './models';
 import dotenv from 'dotenv';
-const port=9000;
-
 dotenv.config();
+const port=process.env.PORT;
+
+
 
 
 (async()=>{

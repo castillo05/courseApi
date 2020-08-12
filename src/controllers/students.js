@@ -1,6 +1,10 @@
 import db from '../models';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const secret=process.env.SECRET;
 
 const createStudents= async(req,res)=>{
 
@@ -61,7 +65,7 @@ const login= async (req, res) => {
                         email:students.email
                     }
 
-                },'jcdeveloper',{expiresIn:60*60});
+                },secret,{expiresIn:60*60});
                 req.body.gethash ?
                 res.status(200).send({token:token})
                 :

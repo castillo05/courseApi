@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const secret='jcdeveloper';
+const secret=process.env.SECRET;
 
 exports.authorization=(req,res,next)=>{
     if(!req.headers.authorization) return res.status(403).send({message:'La peticion no tiene la cabecera de autenticacion'});

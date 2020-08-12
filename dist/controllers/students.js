@@ -6,7 +6,13 @@ var _bcrypt = _interopRequireDefault(require("bcrypt"));
 
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv.default.config();
+
+const secret = process.env.SECRET;
 
 const createStudents = async (req, res) => {
   const {
@@ -80,7 +86,7 @@ const login = async (req, res) => {
             name: students.name,
             email: students.email
           }
-        }, 'jcdeveloper', {
+        }, secret, {
           expiresIn: 60 * 60
         });
 

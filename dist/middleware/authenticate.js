@@ -2,9 +2,13 @@
 
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const secret = 'jcdeveloper';
+_dotenv.default.config();
+
+const secret = process.env.SECRET;
 
 exports.authorization = (req, res, next) => {
   if (!req.headers.authorization) return res.status(403).send({
