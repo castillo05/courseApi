@@ -4,10 +4,10 @@ const fs = require('fs');
 
 module.exports = {
   development: {
-    username: 'root',
-    password: '',
-    database: 'course',
-    host: '127.0.0.1',
+    username: 'a65d4b_course',
+    password: 'course12345',
+    database: 'db_a65d4b_course',
+    host: 'mysql5025.site4now.net',
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {
