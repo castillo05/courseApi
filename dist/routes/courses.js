@@ -13,4 +13,5 @@ api.get('/course/:id', _courses.getCourse);
 api.get('/course', _courses.getCourses);
 api.put('/course/:id', _courses.updateCourse);
 api.get('/courselimit', _courses.getCoursesCount);
+api.delete('/course/:id', _courses.deleteCourse);
 module.exports = api;

@@ -121,10 +121,30 @@ const getCoursesCount = async (req, res) => {
   }
 };
 
+const deleteCourse = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deleted = await _models.default.courses.destroy({
+      where: {
+        id: id
+      }
+    });
+
+    if (deleted) {
+      res.status(200).send({
+        message: 'Curso Eliminado'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createCourse,
   getCourse,
   getCourses,
   updateCourse,
-  getCoursesCount
+  getCoursesCount,
+  deleteCourse
 };
